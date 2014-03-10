@@ -49,3 +49,9 @@ gem 'acts-as-taggable-on'
 gem 'annotate', group: :development
 
 gem 'bootstrap-sass'
+
+# Font-Awesom icons
+gem "font-awesome-rails"
+
+# Jquery UI autocomplete
+gem 'jquery-ui-rails'

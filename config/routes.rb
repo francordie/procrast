@@ -3,7 +3,14 @@ Procrast::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'welcome#index'
+  root 'links#index' #'welcome#index'
+
+  resources :links do
+    member do
+      post 'add_tag'
+      post 'remove_tag'
+    end
+  end
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
