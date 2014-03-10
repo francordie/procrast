@@ -55,3 +55,6 @@ gem "font-awesome-rails"
 
 # Jquery UI autocomplete
 gem 'jquery-ui-rails'
+
+# Heroku: install rails_serve_static_assets and rails_stdout_logging
+gem 'rails_12factor', group: :production
