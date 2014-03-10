@@ -1,45 +1,6 @@
-<legend>Procrast</legend>
-
-<div class="row">
-	<div class="col-sm-12">
-		<%= form_for @link, html: {class: "form-horizontal"} do |f| %>
-			
-			<div class="form-group">
-				<%= f.label :name, class: "col-sm-2 control-label" %>
-				<div class="col-sm-10">
-					<%= f.text_field :name, class: "form-control" %>
-				</div>
-			</div>
-			
-			<div class="form-group">
-				<%= f.label :url, class: "col-sm-2 control-label" %>
-				<div class="col-sm-10">
-					<%= f.text_field :url, class: "form-control" %>
-				</div>
-			</div>
-
-			<div class="form-group">
-				<%= f.label :description, class: "col-sm-2 control-label" %>
-				<div class="col-sm-10">
-					<%= f.text_area :description, class: "form-control" %>
-				</div>
-			</div>
-
-			<div class="form-group">
-				<%= f.label :tag_list, "Tags", class: "col-sm-2 control-label" %>
-				<div class="col-sm-10">
-					<%= f.text_field :tag_list, class: "form-control" %>
-				</div>
-			</div>
-
-			<div class="form-group">
-				<div class="text-center">
-					<%= f.submit "Guardar link" , class: "btn btn-default" %>
-				</div>
-			</div>
-
-		<% end %>		
-	</div>
+<div class="page-header">
+	<button class="btn btn-primary pull-right" data-toggle="modal" data-target="#newLinkModal">Agregar nuevo link</button>
+	<h1>Procrast</h1>
 </div>
 
 <h1>Mostrando 
@@ -59,7 +20,6 @@
 			<thead>
 				<th>Id</th>
 				<th>Nombre</th>
-				<th>Url</th>
 				<th>Tags</th>
 				<th>Description</th>
 				<th></th>	
@@ -68,8 +28,7 @@
 				<% @links.each do |l| %>
 					<tr>
 						<td><%= l.id %></td>
-						<td><%= link_to l.name, l %></td>
-						<td><%= link_to l.url, l.url, target: "_blank" %></td>
+						<td><%= link_to l.name, l, "data-toggle" => "tooltip", title: l.url %></td>
 						<td><%= raw l.tag_list.map {|t| link_to t, links_path(tag: t), class: "label label-info"}.join(" ") %></td>
 						<td><%= l.description %></td>
 						<td>
@@ -83,4 +42,70 @@
 	</div>
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="newLinkModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Agregar nuevo link</h4>
+      </div>
 
+      <div class="modal-body">
+        <%= form_for @link, html: {class: "form-horizontal"} do |f| %>
+			
+					<div class="form-group">
+						<%= f.label :name, "Nombre", class: "col-sm-2 control-label" %>
+						<div class="col-sm-10">
+							<%= f.text_field :name, class: "form-control" %>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<%= f.label :url, "Url", class: "col-sm-2 control-label" %>
+						<div class="col-sm-10">
+							<%= f.text_field :url, class: "form-control", type: "url" %>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<%= f.label :description, "Descripción", class: "col-sm-2 control-label" %>
+						<div class="col-sm-10">
+							<%= f.text_area :description, class: "form-control" %>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<%= f.label :tag_list, "Tags", class: "col-sm-2 control-label" %>
+						<div class="col-sm-10">
+							<%= f.text_field :tag_list, class: "form-control" %>
+						</div>
+					</div>
+
+				<% end %>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Volver</button>
+        <button type="button" id="save_link" class="btn btn-primary">Guardar link</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+
+	$("#save_link").on("click", function(){
+		if($("#link_name").val().trim() && $("#link_url").val().trim()){
+			$("#new_link").submit();
+			return true;
+		}
+		else	
+			alert("Debes indicar el nombre y la url como mínimo.");	
+
+	});
+
+	//
+	$("a[data-toggle=tooltip]").tooltip();
+</script>
