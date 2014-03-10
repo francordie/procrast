@@ -27,6 +27,9 @@ GEM
       tzinfo (~> 0.3.37)
     acts-as-taggable-on (3.0.1)
       rails (>= 3, < 5)
+    annotate (2.6.2)
+      activerecord (>= 2.3.0)
+      rake (>= 0.8.7)
     arel (4.0.2)
     atomic (1.1.15)
     builder (3.1.4)
@@ -112,6 +115,7 @@ PLATFORMS
 
 DEPENDENCIES
   acts-as-taggable-on
+  annotate
   coffee-rails (~> 4.0.0)
   jbuilder (~> 1.2)
   jquery-rails
