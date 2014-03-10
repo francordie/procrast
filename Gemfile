@@ -47,3 +47,5 @@ end
 gem 'acts-as-taggable-on'
 
 gem 'annotate', group: :development
+
+gem 'bootstrap-sass'
