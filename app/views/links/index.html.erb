@@ -30,7 +30,7 @@
 						<td><%= l.id %></td>
 						<td><%= link_to l.name, l, "data-toggle" => "tooltip", title: l.url %></td>
 						<td><%= raw l.tag_list.map {|t| link_to t, links_path(tag: t), class: "label label-info"}.join(" ") %></td>
-						<td><%= l.description %></td>
+						<td><%= l.description.truncate 50 %></td>
 						<td>
 							<%= link_to '<i class="fa fa-trash-o"></i>'.html_safe, link_path(l), "data-method" => :delete, class: "label label-default", "data-confirm" => "Seguro de que quieres eliminar este link?" %>
 							<%= link_to '<i class="fa fa-external-link"></i>'.html_safe, l.url, class: "label label-default", target: "_blank" %>
